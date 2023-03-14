@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</head>
+
+<body>
+
+    <main>
+        <h1 id="title">Contacts List</h1>
+        <button class="add-new-contact" type="button">
+            <ion-icon name="person-add-outline"></ion-icon>
+        </button>
+        <div class="contacts">
+            <div class="card">
+                <span>Name</span>
+                <span>Email</span>
+                <span>Number</span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="card">
+                <span>Rodrigo Marin Prata</span>
+                <span>rprata95@gmail.com</span>
+                <span>32999984675</span>
+                <span class="edit">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </span>
+                <span class="delete">
+                    <ion-icon name="trash-outline"></ion-icon>
+                </span>
+            </div>
+        </div>
+    </main>
+    <div class="all-modal">
+        <div class="modal">
+            <ion-icon class="close" name="close-outline"></ion-icon>
+            <h1>Add a new Contact</h1>
+            <form>
+                <label>Name: <input id="input-name" type="text"></label>
+                <label>Email: <input id="input-email" type="email"></label>
+                <label>Phone: <input id="input-phone" type="number"></label>
+                <button class="add-confirm">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
