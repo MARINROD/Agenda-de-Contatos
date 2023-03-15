@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="./script.js" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -28,17 +32,7 @@
                 <span></span>
                 <span></span>
             </div>
-            <div class="card">
-                <span>Rodrigo Marin Prata</span>
-                <span>rprata95@gmail.com</span>
-                <span>32999984675</span>
-                <span class="edit">
-                    <ion-icon name="settings-outline"></ion-icon>
-                </span>
-                <span class="delete">
-                    <ion-icon name="trash-outline"></ion-icon>
-                </span>
-            </div>
+
         </div>
     </main>
     <div class="all-modal">
@@ -64,7 +58,18 @@
             </div>
         </div>
     </div>
-
+    <div class="edit-modal">
+        <div class="edit-modal-content">
+            <ion-icon class="close" name="close-outline"></ion-icon>
+            <h1>Edit Contact</h1>
+            <form>
+                <label>Name: <input id="input-name" type="text"></label>
+                <label>Email: <input id="input-email" type="email"></label>
+                <label>Phone: <input id="input-phone" type="number"></label>
+                <button type="button" class="edit-confirm">Save</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

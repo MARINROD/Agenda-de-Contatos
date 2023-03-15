@@ -1,6 +1,6 @@
 const modalPage = document.querySelector('.all-modal');
 const addNewContact = document.querySelector('.add-new-contact');
-const close = document.querySelector('.close');
+const close = document.querySelectorAll('.close');
 const form = document.querySelector('form');
 const inputName = document.querySelector('#input-name');
 const inputEmail = document.querySelector('#input-email');
@@ -12,24 +12,41 @@ const deleteModal = document.querySelector('.delete-modal');
 const btnDeleteYes = document.querySelector('#yes');
 const btnDeleteNo = document.querySelector('#no');
 const btnAdd = document.querySelector('.add-confirm');
+const editModal = document.querySelector('.edit-modal');
+const nameEdit = document.querySelector('.edit-modal-content #input-name');
+const emailEdit = document.querySelector('.edit-modal-content #input-email');
+const phoneEdit = document.querySelector('.edit-modal-content #input-phone');
+const closeEdit = document.querySelector('.edit-modal-content .close');
+const btnEditConfirm = document.querySelector('.edit-confirm');
 
 
 addNewContact.addEventListener('click', () => {
     modalPage.style.visibility = 'visible';
-})
-close.addEventListener('click', () => {
-    modalPage.style.visibility = 'hidden';
+    inputEmail.value = '';
+    inputName.value = '';
+    inputPhone.value = '';
 })
 
+function btnClose() {
+    for (let i = 0; i < close.length; i++) {
+        close[i].addEventListener('click', () => {
+            modalPage.style.visibility = 'hidden';
+            editModal.style.visibility = 'hidden';
+        })
+    }
+}
+btnClose();
+
+
 function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
+    const re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
 
 btnAdd.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if (inputName.length < 3 || validateEmail(inputEmail.value) === false || inputPhone.length < 8) {
+    if (inputName.value.length < 2 || validateEmail(inputEmail.value) === false || inputPhone.value.length !== 11) {
         return;
     }
 
@@ -58,6 +75,10 @@ btnAdd.addEventListener('click', (event) => {
     contacts.appendChild(contact);
     modalPage.style.visibility = 'hidden';
 
+    if (phone.textContent[0] + phone.textContent[1] === '71') {
+        name.style.color = 'blue';
+    }
+
     deleted.addEventListener('click', () => {
         deleteModal.style.visibility = 'visible';
         btnDeleteYes.addEventListener('click', () => {
@@ -66,10 +87,32 @@ btnAdd.addEventListener('click', (event) => {
         })
     })
 
+    edit.addEventListener('click', () => {
+        btnClose();
+        editModal.style.visibility = 'visible';
+        nameEdit.value = name.textContent;
+        emailEdit.value = email.textContent;
+        phoneEdit.value = phone.textContent;
+
+        btnEditConfirm.addEventListener('click', () => {
+            if ((nameEdit.value !== name.textContent || emailEdit.value !== email.textContent || phoneEdit.value !== phone.textContent) && nameEdit.value.length > 1 && phoneEdit.value.length === 11 && validateEmail(inputEmail.value) === true) {
+                name.textContent = nameEdit.value;
+                email.textContent = emailEdit.value;
+                phone.textContent = phoneEdit.value;
+                editModal.style.visibility = 'hidden';
+
+            } else {
+                console.log('deu ruim');
+                return;
+            }
+
+        })
+
+
+    })
 })
 
 btnDeleteNo.addEventListener('click', () => {
     deleteModal.style.visibility = 'hidden';
 })
-
 
