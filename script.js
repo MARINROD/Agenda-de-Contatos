@@ -18,14 +18,14 @@ const emailEdit = document.querySelector('.edit-modal-content #input-email');
 const phoneEdit = document.querySelector('.edit-modal-content #input-phone');
 const closeEdit = document.querySelector('.edit-modal-content .close');
 const btnEditConfirm = document.querySelector('.edit-confirm');
+const arrayContatos = [];
 
 
-addNewContact.addEventListener('click', () => {
-    modalPage.style.visibility = 'visible';
-    inputEmail.value = '';
-    inputName.value = '';
-    inputPhone.value = '';
-})
+
+function validateEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
 
 function btnClose() {
     for (let i = 0; i < close.length; i++) {
@@ -37,18 +37,29 @@ function btnClose() {
 }
 btnClose();
 
-
-function validateEmail(email) {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
-}
+addNewContact.addEventListener('click', () => {
+    modalPage.style.visibility = 'visible';
+    inputEmail.value = '';
+    inputName.value = '';
+    inputPhone.value = '';
+})
 
 btnAdd.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
+    for (let i = 0; i < arrayContatos.length; i++) {
+        if (inputEmail.value = arrayContatos[i].email) {
+            return;
+        }
+
+    }
+
+
     if (inputName.value.length < 2 || validateEmail(inputEmail.value) === false || inputPhone.value.length !== 11) {
         return;
     }
+
+
 
     const contact = document.createElement('div');
     const name = document.createElement('span');
@@ -75,17 +86,17 @@ btnAdd.addEventListener('click', (event) => {
     contacts.appendChild(contact);
     modalPage.style.visibility = 'hidden';
 
+    const objeto = {
+        nome: name.textContent,
+        email: email.textContent,
+        phone: phone.textContent
+    }
+    arrayContatos.push(objeto);
+
     if (phone.textContent[0] + phone.textContent[1] === '71') {
         name.style.color = 'blue';
     }
 
-    deleted.addEventListener('click', () => {
-        deleteModal.style.visibility = 'visible';
-        btnDeleteYes.addEventListener('click', () => {
-            contacts.removeChild(contact);
-            deleteModal.style.visibility = 'hidden';
-        })
-    })
 
     edit.addEventListener('click', () => {
         btnClose();
@@ -105,11 +116,17 @@ btnAdd.addEventListener('click', (event) => {
                 console.log('deu ruim');
                 return;
             }
-
         })
-
-
     })
+
+    deleted.addEventListener('click', () => {
+        deleteModal.style.visibility = 'visible';
+        btnDeleteYes.addEventListener('click', () => {
+            contacts.removeChild(contact);
+            deleteModal.style.visibility = 'hidden';
+        })
+    })
+
 })
 
 btnDeleteNo.addEventListener('click', () => {
